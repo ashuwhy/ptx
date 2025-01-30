@@ -1,0 +1,24 @@
+.version 8.0
+.target sm_50
+.address_size 64
+
+.visible .entry _Z6addKernelPfS_ (
+    .param .u64 _Z6addKernelPfS__param_0,
+    .param .u64 _Z6addKernelPfS__param_1
+)
+{
+    .reg .f32  %f<3>;
+    .reg .s32  %r<3>;
+    .reg .u64  %rd<3>;
+
+    ld.param.u64    %rd1, [_Z6addKernelPfS__param_0];
+    ld.param.u64    %rd2, [_Z6addKernelPfS__param_1];
+    cvta.to.global.u64  %rd1, %rd1;
+    cvta.to.global.u64  %rd2, %rd2;
+    ld.global.f32   %f1, [%rd1];
+    ld.global.f32   %f2, [%rd2];
+    add.f32         %f1, %f1, %f2;
+    st.global.f32   [%rd1], %f1;
+    ret;
+}
+
